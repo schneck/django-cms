@@ -236,7 +236,7 @@ Example::
 
 	{% load cms_tags %}
 	<div class="multicolumn">
-	{% for plugin in instance.child_plugins %}
+	{% for plugin in instance.child_plugin_instances %}
 		<div style="width: {{ plugin.width }}00px;">
      		{% render_plugin plugin %}
 		</div>
@@ -462,19 +462,10 @@ Toolbar Templatetags
 
 .. highlightlang:: html+django
 
-To use any of the following templatetags you first need to load them at the
-top of your template::
-
-    {% load cms_toolbar %}
-	
-.. templatetag:: cms_toolbar
-
-cms_toolbar
-===========
-
-The ``cms_toolbar`` templatetag will add the required css and javascript to the
-sekizai blocks in the base template. The templatetag has to be placed after the
-``<body>`` tag and before any ``{% cms_placeholder %}`` occurrences within your HTML.
+The ``cms_toolbar`` templatetag is included in the ``cms_tags`` library and will add the 
+required css and javascript to the sekizai blocks in the base template. The templatetag 
+has to be placed after the ``<body>`` tag and before any ``{% cms_placeholder %}`` occurrences 
+within your HTML.
 
 Example::
 

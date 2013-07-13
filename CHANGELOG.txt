@@ -118,7 +118,7 @@
 - Fixed page change form (jQuery and permissions)
 - Fixed placeholder field permission checks
 
-==== 2.4.0 ===
+==== 2.4.0 (2013-4-17)===
 
 Please see Install/2.4 release notes *before* attempting to upgrade to version 2.4.
 
@@ -134,7 +134,27 @@ Please see Install/2.4 release notes *before* attempting to upgrade to version 2
 - CMS_FRONTEND_LANGUAGES setting removed
 - MultilingualMiddleware has been removed
 - CMS_FLAT_URLS has been removed
+- CMS_MODERATOR has been removed and replaced with simple publisher.
+- PlaceholderAdmin has now language tabs and has support for django-hvad
+- Added `cms.middleware.language.LanguageCookieMiddleware`
+- Added CMS_RAW_ID_USERS
 
+==== 2.4.1 (2013-4-22)===
 
-==== NEXT ====
-- Fixed #1543: Nasty empty line in cms/plugins/link.html
+- USE_I18N=False fixed
+- some frontend css stuff fixed
+- check_copy_relations fixed for abstract classes
+- non public frontend languages fixed
+
+==== 2.4.2 (2013-5-29)===
+
+- Apphook edit mode bugfix
+- Added option to render_placeholder tag to set language
+- Huge permission cache invalidation speed up
+- Doc improvements
+- css cleanup in PlaceholderAdmin
+- Log change of page status done via AJAX
+- Use --noinput convention for delete_orphaned_plugins command
+- added Testing docs
+- fixed more issues with only one language
+- locales updated

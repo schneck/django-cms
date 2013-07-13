@@ -1,6 +1,6 @@
-##################################
-2.4 release notes (IN DEVELOPMENT)
-##################################
+#################
+2.4 release notes
+#################
 
 *****************
 What's new in 2.4
@@ -106,6 +106,12 @@ can publish changes to the public site.
     will fail and leave bad data in your database. See :ref:`cms-list-command`
     and :ref:`cms-delete-orphaned-plugins-command`.
 
+    Also, check if all your plugins define a
+    :meth:`~cms.models.CMSPlugin.copy_relations` method if required. You can do
+    this by running ``manage.py cms check`` and read the *Presence of
+    "copy_relations"* section. See :ref:`handling-relations` for guidance on
+    this topic.
+
 
 Added Fix MPTTT Management command
 ==================================
@@ -176,6 +182,17 @@ What you need to do:
 
 - reverse urls now return the language prefix as well. So maybe there is some code that adds language prefixes. Remove
   this code.
+
+Added LanguageCookieMiddleware
+==============================
+
+To fix the behavior of django to determine the language every time from new, when you visit `/` on a page, this
+middleware saves the current language in a cookie with every response.
+
+To enable this middleware add the following to your `MIDDLEWARE_CLASSES` setting:
+
+    `cms.middleware.language.LanguageCookieMiddleware`
+
 
 CMS_LANGUAGES
 =============
@@ -350,6 +367,26 @@ For example, if root_level is 0 the menu will start at that level regardless of 
 The third argument: ``nephews`` (default=100), specifies how many levels of nephews (children of siblings) are shown.
 
 
+PlaceholderAdmin support i18n
+=============================
+
+
+If you use placeholders in other apps or models we now support more than one language out of the box.
+If you just use the :class:`PlaceholderAdmin` it will display language tabs like the cms. If you
+use `django-hvad`_ it uses the hvad language tabs.
+
+If you want to disable this behavior you can set ``render_placeholder_language_tabs = False`` on your Admin
+class that extends PlaceholderAdmin. If you use a custom ``change_form_template`` be sure to have a look at
+``cms/templates/admin/placeholders/placeholder/change_form.html`` for how to incorporate language tabs.
+
+
+Added CMS_RAW_ID_USERS
+======================
+
+If you have a lot of users (500+) you can set this setting to a number after which admin User fields are displayed in
+a raw Id field. This improves performance a lot in the admin as it has not to load all the users into the html.
+
+
 ******************************
 Backwards incompatible changes
 ******************************
@@ -368,3 +405,4 @@ Pending deprecations
   this redundant as every non managed url will behave like this.
 
 .. _django-reversion: https://github.com/etianen/django-reversion
+.. _django-hvad: https://github.com/kristianoellegaard/django-hvad
